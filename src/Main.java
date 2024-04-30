@@ -46,7 +46,7 @@ public class Main {
         taskManager.updateTask(task3);
 
         //обновление эпика
-        Epic epic3 = new Epic(epic.getId(), "Обновленная эпика 1", "Обновление описания эпика 1", TaskStatus.IN_PROGRESS, epic.getTasks());
+        Epic epic3 = new Epic(epic.getId(), "Обновленная эпика 1", "Обновление описания эпика 1", TaskStatus.IN_PROGRESS, epic.getSubTasks());
         taskManager.updateEpic(epic3);
 
         //обновление подзадачи

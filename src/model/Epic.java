@@ -6,19 +6,19 @@ import java.util.ArrayList;
 import java.util.Objects;
 
 public class Epic extends Task{
-    private ArrayList<Integer> tasks = new ArrayList<Integer>();
+    private ArrayList<Integer> subTasks = new ArrayList<Integer>();
 
     public Epic(String title, String description){
         super(title, description);
     }
 
-    public Epic(int id, String title, String description, TaskStatus  status, ArrayList<Integer> tasksIds) {
+    public Epic(int id, String title, String description, TaskStatus  status, ArrayList<Integer> subTask) {
         super(id, title, description, status);
-        this.tasks = tasksIds;
+        this.subTasks = subTask;
     }
 
-    public ArrayList<Integer> getTasks() {
-        return tasks;
+    public ArrayList<Integer> getSubTasks() {
+        return subTasks;
     }
 
     @Override
@@ -27,18 +27,18 @@ public class Epic extends Task{
         if (o == null || getClass() != o.getClass()) return false;
         if (!super.equals(o)) return false;
         Epic epic = (Epic) o;
-        return Objects.equals(tasks, epic.tasks);
+        return Objects.equals(subTasks, epic.subTasks);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), tasks);
+        return Objects.hash(super.hashCode(), subTasks);
     }
 
     @Override
     public String toString() {
         return "Эпик{" +
-                "подзадачи=" + tasks +
+                "подзадачи=" + subTasks +
                 '}';
     }
 }

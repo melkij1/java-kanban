@@ -22,8 +22,6 @@ public class TaskManagerServiceImpl implements TaskManagerService {
     public void createTask(Task task) {
         task.setId(idCounter++);
         tasks.put(task.getId(), task);
-
-        System.out.println(tasks);
     }
 
     //метод создание подзадачи
@@ -35,11 +33,9 @@ public class TaskManagerServiceImpl implements TaskManagerService {
 
         //добавляем epic
         int epicId = subTask.getEpicId();
-        ArrayList<Integer> tasksList = epics.get(epicId).getTasks();
+        ArrayList<Integer> tasksList = epics.get(epicId).getSubTasks();
         tasksList.add(subTask.getEpicId());
         checkEpicStatus(epicId);
-
-        System.out.println(subTasks);
     }
 
     //метод создание эпика
@@ -47,7 +43,6 @@ public class TaskManagerServiceImpl implements TaskManagerService {
     public void createEpic(Epic epic) {
         epic.setId(idCounter++);
         epics.put(epic.getId(), epic);
-        System.out.println(epics);
     }
 
     //метод получения списка задач
@@ -79,7 +74,7 @@ public class TaskManagerServiceImpl implements TaskManagerService {
     @Override
     public void removeAllSubTask() {
         for(Epic epic : epics.values()) {
-            epic.getTasks().clear();
+            epic.getSubTasks().clear();
             checkEpicStatus(epic.getId());
         }
         subTasks.clear();
@@ -90,10 +85,12 @@ public class TaskManagerServiceImpl implements TaskManagerService {
     public void removeAllEpic() {
         for(Epic epic : epics.values()) {
             int epicId = epic.getId();
-            ArrayList<Integer> tasksList = epics.get(epicId).getTasks();
+            ArrayList<Integer> tasksList = epics.get(epicId).getSubTasks();
             for(Integer taskId : tasksList) {
                 tasks.remove(taskId);
+                subTasks.remove(taskId);
             }
+
         }
         epics.clear();
     }
@@ -119,7 +116,7 @@ public class TaskManagerServiceImpl implements TaskManagerService {
     //метод получения списка подзадачи по id эпика
     @Override
     public ArrayList<SubTask> getListSubTaskByEpicId(int epicId) {
-        ArrayList<Integer> tasksList = epics.get(epicId).getTasks();
+        ArrayList<Integer> tasksList = epics.get(epicId).getSubTasks();
         ArrayList<SubTask> subTasksList = new ArrayList<>();
         for(Integer taskId : tasksList) {
             subTasksList.add(subTasks.get(taskId));
@@ -142,7 +139,7 @@ public class TaskManagerServiceImpl implements TaskManagerService {
 
             Epic epic = epics.get(epicId);
             if (epic != null) {
-                ArrayList<Integer> tasksList = epic.getTasks();
+                ArrayList<Integer> tasksList = epic.getSubTasks();
                 tasksList.removeIf(taskId -> taskId.equals(id));
                 subTasks.remove(id);
                 checkEpicStatus(epicId);
@@ -157,9 +154,10 @@ public class TaskManagerServiceImpl implements TaskManagerService {
     //метод удаления эпика по id
     @Override
     public void deleteEpicById(int id) {
-        ArrayList<Integer> tasksList = epics.get(id).getTasks();
+        ArrayList<Integer> tasksList = epics.get(id).getSubTasks();
         for(Integer taskId : tasksList) {
             tasks.remove(taskId);
+            subTasks.remove(taskId);
         }
         epics.remove(id);
     }
@@ -190,7 +188,7 @@ public class TaskManagerServiceImpl implements TaskManagerService {
         int counterDone = 0;
         int counterNew = 0;
 
-        ArrayList<Integer> subTasksList = epics.get(id).getTasks();
+        ArrayList<Integer> subTasksList = epics.get(id).getSubTasks();
         for(Integer taskId : subTasksList) {
             if(subTasks.containsKey(taskId)){
                 if(subTasks.get(taskId).getStatus().equals(TaskStatus.DONE)) {
