@@ -5,8 +5,9 @@ import model.SubTask;
 import model.Task;
 
 import java.util.ArrayList;
+import java.util.List;
 
-public interface TaskManagerService {
+public interface TaskManager {
 
     void createTask(Task task);
 
@@ -47,4 +48,6 @@ public interface TaskManagerService {
     void updateEpic(Epic epic);
 
     void checkEpicStatus(int id);
+
+    List<Task> getHistory();
 }
