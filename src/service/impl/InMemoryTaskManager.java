@@ -4,18 +4,21 @@ import enums.TaskStatus;
 import model.Epic;
 import model.SubTask;
 import model.Task;
-import service.TaskManagerService;
+import service.HistoryManager;
+import service.Manager;
+import service.TaskManager;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
-public class TaskManagerServiceImpl implements TaskManagerService {
+public class InMemoryTaskManager implements TaskManager {
     private int idCounter = 0;
 
     private final HashMap<Integer, Task> tasks = new HashMap<>();
     private final HashMap<Integer, SubTask> subTasks = new HashMap<>();
     private final HashMap<Integer, Epic> epics = new HashMap<>();
-
+    private final HistoryManager inMemoryHistoryManager = Manager.getDefaultHistory();
 
     //метод создание задачи
     @Override
@@ -34,7 +37,7 @@ public class TaskManagerServiceImpl implements TaskManagerService {
         //добавляем epic
         int epicId = subTask.getEpicId();
         ArrayList<Integer> tasksList = epics.get(epicId).getSubTasks();
-        tasksList.add(subTask.getEpicId());
+        tasksList.add(subTask.getId());
         checkEpicStatus(epicId);
     }
 
@@ -98,18 +101,28 @@ public class TaskManagerServiceImpl implements TaskManagerService {
     //метод получения задачи по id
     @Override
     public Task getTaskById(int id) {
+        System.out.println(tasks.get(id));
+        if(tasks.get(id) != null){
+            inMemoryHistoryManager.addHistory(tasks.get(id));
+        }
         return tasks.get(id);
     }
 
     //метод получения подзадачи по id
     @Override
     public SubTask getSubTaskById(int id) {
+        if(subTasks.get(id) != null){
+            inMemoryHistoryManager.addHistory(subTasks.get(id));
+        }
         return subTasks.get(id);
     }
 
     //метод получения эпика по id
     @Override
     public Epic getEpicById(int id) {
+        if(epics.get(id) != null){
+            inMemoryHistoryManager.addHistory(epics.get(id));
+        }
         return epics.get(id);
     }
 
@@ -207,5 +220,10 @@ public class TaskManagerServiceImpl implements TaskManagerService {
         }else {
             epics.get(id).setStatus(TaskStatus.IN_PROGRESS);
         }
+    }
+
+    @Override
+    public List<Task> getHistory() {
+        return inMemoryHistoryManager.getHistory();
     }
 }

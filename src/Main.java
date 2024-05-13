@@ -3,11 +3,11 @@ import model.Epic;
 import model.SubTask;
 import model.Task;
 import service.Manager;
-import service.TaskManagerService;
+import service.TaskManager;
 
 public class Main {
     public static void main(String[] args) {
-        TaskManagerService taskManager= new Manager().getTaskManager();
+        TaskManager taskManager= new Manager().getTaskManager();
 
         //создаем задачи
         Task task = new Task("Задача 1", "Описание задачи 1");
@@ -23,9 +23,10 @@ public class Main {
         taskManager.createEpic(epic);
         taskManager.createEpic(epic2);
 
+
         //создаем подзадачу
         SubTask subTask = new SubTask("Подзадача 1", "Описание подзадачи 1", 2);
-        SubTask subTask2 = new SubTask("Подзадача 2", "Описание подзадачи 2", 3);
+        SubTask subTask2 = new SubTask("Подзадача 2", "Описание подзадачи 2", 2);
         SubTask subTask3 = new SubTask("Подзадача 3", "Описание подзадачи 3", 2);
 
         taskManager.createSubTask(subTask);
@@ -53,6 +54,8 @@ public class Main {
         SubTask subTask4 = new SubTask(subTask.getId(), "Обновленная подзадача 1", "Обновление описания подзадачи 1", TaskStatus.IN_PROGRESS, subTask.getEpicId());
         taskManager.updateSubTask(subTask4);
 
+        printAllTasks(taskManager);
+
         //получение всех задач
         taskManager.getTasks();
 
@@ -61,6 +64,8 @@ public class Main {
 
         //получение всех эпиков
         taskManager.getEpics();
+
+
 
         //удаление задачи по ид
         taskManager.deleteTaskById(task2.getId());
@@ -79,5 +84,28 @@ public class Main {
 
         //удаление всех подзадач
         taskManager.removeAllSubTask();
+    }
+
+    private static void printAllTasks(TaskManager manager) {
+        System.out.println("Задачи:");
+        for (Task task : manager.getTasks()) {
+            System.out.println(task);
+        }
+        System.out.println("Эпики:");
+        for (Task epic : manager.getEpics()) {
+            System.out.println(epic);
+            for (Task task : manager.getListSubTaskByEpicId(epic.getId())) {
+                System.out.println("--> " + task);
+            }
+        }
+        System.out.println("Подзадачи:");
+        for (Task subtask : manager.getSubTasks()) {
+            System.out.println(subtask);
+        }
+
+        System.out.println("История:");
+        for (Task task : manager.getHistory()) {
+            System.out.println(task);
+        }
     }
 }
