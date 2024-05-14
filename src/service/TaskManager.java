@@ -15,11 +15,11 @@ public interface TaskManager {
 
     void createEpic(Epic epic);
 
-    ArrayList<Task> getTasks();
+    List<Task> getTasks();
 
-    ArrayList<SubTask> getSubTasks();
+    List<SubTask> getSubTasks();
 
-    ArrayList<Epic> getEpics();
+    List<Epic> getEpics();
 
     void removeAllTask();
 
@@ -33,7 +33,7 @@ public interface TaskManager {
 
     Epic getEpicById(int id);
 
-    ArrayList<SubTask> getListSubTaskByEpicId(int epicId);
+    List<SubTask> getListSubTaskByEpicId(int epicId);
 
     void deleteTaskById(int id);
 

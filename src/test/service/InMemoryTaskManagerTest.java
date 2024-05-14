@@ -1,4 +1,4 @@
-package test;
+package test.service;
 
 import enums.TaskStatus;
 import model.Epic;
@@ -9,33 +9,13 @@ import org.junit.jupiter.api.Test;
 import service.Manager;
 import service.TaskManager;
 
+import static org.junit.jupiter.api.Assertions.*;
 
-
-class TaskTest {
-
-    @Test
-    public void taskEqualToEachOther() {
-        Task task1 = new Task("Task1", "Description1");
-        Task task2 = new Task("Task1", "Description1");
-        Assertions.assertEquals(task1, task2);
-    }
-
-    @Test
-    public void epicEqualToEachOther() {
-        Epic epic1 = new Epic("Epic1", "Description1");
-        Epic epic2 = new Epic("Epic1", "Description1");
-        Assertions.assertEquals(epic1, epic2);
-    }
-
-    @Test
-    public void taskManagerClassAlwaysReturnsInitializedManager() {
-        TaskManager taskManager = new Manager().getTaskManager();
-        Assertions.assertNotNull(taskManager);
-    }
+class InMemoryTaskManagerTest {
 
 
     @Test
-    public void testAddTask(){
+    public void createTaskExpectedAddNewTask(){
         TaskManager taskManager = new Manager().getTaskManager();
 
         Task task1 = new Task("Task1", "Description1");
@@ -49,7 +29,7 @@ class TaskTest {
     }
 
     @Test
-    public void testTaskIdConflict(){
+    public void taskIdConflict(){
         TaskManager taskManager = new Manager().getTaskManager();
         Task task5 = new Task("Task5", "Description5");
         Task task6 = new Task("Task6", "Description6");
@@ -64,7 +44,7 @@ class TaskTest {
     }
 
     @Test
-    public void testTaskImmutability(){
+    public void taskImmutability(){
         TaskManager taskManager = new Manager().getTaskManager();
         Task task5 = new Task("Task5", "Description5");
 
@@ -77,7 +57,7 @@ class TaskTest {
     }
 
     @Test
-    public void testAddTaskByHistoryManager(){
+    public void createdTaskAddByHistoryManager(){
         TaskManager taskManager = new Manager().getTaskManager();
 
         Task task1 = new Task("Task1", "Description1");
@@ -93,7 +73,7 @@ class TaskTest {
     }
 
     @Test
-    public void testCheckClearTaskHashMap(){
+    public void checkClearTaskHashMap(){
         TaskManager taskManager = new Manager().getTaskManager();
 
         Task task1 = new Task("Task1", "Description1");
@@ -110,7 +90,7 @@ class TaskTest {
     }
 
     @Test
-    public void testCheckClearEpicHashMap(){
+    public void checkClearEpicHashMap(){
         TaskManager taskManager = new Manager().getTaskManager();
 
         Epic epic1 = new Epic("Epic1", "Description1");
@@ -127,7 +107,7 @@ class TaskTest {
     }
 
     @Test
-    public void testCheckClearSubTaskHashMap(){
+    public void checkClearSubTaskHashMap(){
         TaskManager taskManager = new Manager().getTaskManager();
 
         Epic epic1 = new Epic("Epic1", "Description1");
@@ -160,7 +140,7 @@ class TaskTest {
 
 
     @Test
-    public void testUpdateTask() {
+    public void updateTaskEquals(){
         TaskManager taskManager = new Manager().getTaskManager();
         Task task1 = new Task("Task1", "Description1");
         Task updatedTask = new Task(task1.getId(), "Обновленная задачи 1", "Обновление описания задачи 1", TaskStatus.IN_PROGRESS);
@@ -174,7 +154,7 @@ class TaskTest {
 
 
     @Test
-    public void testUpdateSubTask() {
+    public void updateSubTaskEquals(){
         TaskManager taskManager = new Manager().getTaskManager();
         Epic epic = new Epic("Эпик 1", "Описание эпика 1");
 
@@ -194,7 +174,7 @@ class TaskTest {
 
 
     @Test
-    public  void testUpdateEpic() {
+    public  void updateEpicEquals(){
         TaskManager taskManager = new Manager().getTaskManager();
         Epic epic = new Epic("Epic1", "Description1");
         taskManager.createEpic(epic);
@@ -205,5 +185,4 @@ class TaskTest {
 
         Assertions.assertEquals(updateEpic, taskManager.getEpicById(epic.getId()));
     }
-
 }
