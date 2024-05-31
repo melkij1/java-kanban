@@ -8,10 +8,7 @@ import service.HistoryManager;
 import service.Manager;
 import service.TaskManager;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class InMemoryTaskManager implements TaskManager {
     private int idCounter = 0;
@@ -71,6 +68,9 @@ public class InMemoryTaskManager implements TaskManager {
     //метод удаление всех задач
     @Override
     public void removeAllTask() {
+        for(Integer taskId : tasks.keySet()) {
+            inMemoryHistoryManager.remove(taskId);
+        }
         tasks.clear();
     }
 
@@ -81,6 +81,11 @@ public class InMemoryTaskManager implements TaskManager {
             epic.getSubTasks().clear();
             checkEpicStatus(epic.getId());
         }
+
+        for(Integer id : subTasks.keySet()) {
+            inMemoryHistoryManager.remove(id);
+        }
+
         subTasks.clear();
     }
 
@@ -93,8 +98,11 @@ public class InMemoryTaskManager implements TaskManager {
             for(Integer taskId : tasksList) {
                 tasks.remove(taskId);
                 subTasks.remove(taskId);
+                inMemoryHistoryManager.remove(taskId);
             }
-
+        }
+        for(Integer id : epics.keySet()) {
+            inMemoryHistoryManager.remove(id);
         }
         epics.clear();
     }

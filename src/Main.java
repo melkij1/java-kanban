@@ -35,6 +35,7 @@ public class Main {
 
         //получение задачи по id
         taskManager.getTaskById(task.getId());
+        taskManager.getTaskById(task.getId());
 
         //получение подзадачи по id
         taskManager.getSubTaskById(subTask.getId());
