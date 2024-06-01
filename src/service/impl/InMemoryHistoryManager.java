@@ -6,8 +6,7 @@ import service.HistoryManager;
 import java.util.*;
 
 public class InMemoryHistoryManager implements HistoryManager {
-    final private LinkedListCustom history = new LinkedListCustom();
-
+    final LinkedListCustom history = new LinkedListCustom();
 
     @Override
     public void addHistory(Task task) {
@@ -42,8 +41,8 @@ public class InMemoryHistoryManager implements HistoryManager {
 
         final private Map<Integer, Node<Task>> historyMap = new HashMap<>();
 
-        public void linkLast(Task task){
-            if(historyMap.containsKey(task.getId())) {
+        public void linkLast(Task task) {
+            if (historyMap.containsKey(task.getId())) {
                 historyMap.remove(task.getId());
             }
 
@@ -51,14 +50,14 @@ public class InMemoryHistoryManager implements HistoryManager {
 
         }
 
-        public void removeNode(int id){
+        public void removeNode(int id) {
             historyMap.remove(id);
         }
 
 
         public List<Task> getTasks() {
             List<Task> newListTasks = new ArrayList<>();
-            for(Node<Task> historyNode : historyMap.values()){
+            for (Node<Task> historyNode : historyMap.values()) {
                 newListTasks.add(historyNode.task);
             }
 
