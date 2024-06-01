@@ -35,13 +35,17 @@ public class Main {
 
         //получение задачи по id
         taskManager.getTaskById(task.getId());
-        taskManager.getTaskById(task.getId());
+        taskManager.getTaskById(task2.getId());
+        taskManager.getTaskById(task2.getId());
 
         //получение подзадачи по id
         taskManager.getSubTaskById(subTask.getId());
+        taskManager.getSubTaskById(subTask2.getId());
+        taskManager.getSubTaskById(subTask3.getId());
 
         //получение эпика по id
         taskManager.getEpicById(epic.getId());
+        taskManager.getEpicById(epic2.getId());
 
         //обновление задачи
         Task task3 = new Task(task.getId(), "Обновленная задачи 1", "Обновление описания задачи 1", TaskStatus.IN_PROGRESS);
@@ -68,14 +72,14 @@ public class Main {
 
 
 
-        //удаление задачи по ид
-        taskManager.deleteTaskById(task2.getId());
-
-        //удаление эпика по ид
-        taskManager.deleteEpicById(epic2.getId());
-
-        //удаление подзадачи по ид
-        taskManager.deleteSubTaskById(subTask2.getId());
+//        //удаление задачи по ид
+//        taskManager.deleteTaskById(task2.getId());
+//
+//        //удаление эпика по ид
+//        taskManager.deleteEpicById(epic2.getId());
+//
+//        //удаление подзадачи по ид
+//        taskManager.deleteSubTaskById(subTask2.getId());
 
         //удаление всех задач
         taskManager.removeAllTask();
@@ -85,6 +89,9 @@ public class Main {
 
         //удаление всех подзадач
         taskManager.removeAllSubTask();
+
+        System.out.println("Проверка списков после удаления");
+        printAllTasks(taskManager);
     }
 
     private static void printAllTasks(TaskManager manager) {
