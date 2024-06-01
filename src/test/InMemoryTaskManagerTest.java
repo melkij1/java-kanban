@@ -1,4 +1,4 @@
-package test.service;
+package test;
 
 import enums.TaskStatus;
 import model.Epic;
@@ -8,8 +8,6 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import service.Manager;
 import service.TaskManager;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 class InMemoryTaskManagerTest {
 
