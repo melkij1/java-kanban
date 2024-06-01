@@ -11,25 +11,25 @@ public class Task {
     private TaskStatus status = TaskStatus.NEW;
 
 
-    public Task(String title, String description) {
+    public Task (String title, String description) {
         this.title = title;
         this.description = description;
     }
 
-    public Task(String title, String description, TaskStatus status) {
+    public Task (String title, String description, TaskStatus status) {
         this.title = title;
         this.description = description;
         this.status = status;
     }
 
-    public Task(int id, String title, String description, TaskStatus status) {
+    public Task (int id, String title, String description, TaskStatus status) {
         this.id = id;
         this.title = title;
         this.description = description;
         this.status = status;
     }
 
-    public void setId(int id) {
+    public void setId (int id) {
         this.id = id;
     }
 
@@ -49,7 +49,7 @@ public class Task {
         return status;
     }
 
-    public void setStatus(TaskStatus status) {
+    public void setStatus (TaskStatus status) {
         this.status = status;
     }
 
