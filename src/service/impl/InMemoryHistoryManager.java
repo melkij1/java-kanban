@@ -39,7 +39,7 @@ public class InMemoryHistoryManager implements HistoryManager {
             }
         }
 
-        final private Map<Integer, Node<Task>> historyMap = new HashMap<>();
+        final Map<Integer, Node<Task>> historyMap = new HashMap<>();
 
         public void linkLast(Task task) {
             if (historyMap.containsKey(task.getId())) {
