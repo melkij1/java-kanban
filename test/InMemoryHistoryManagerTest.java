@@ -1,5 +1,3 @@
-package test;
-
 import model.Epic;
 import model.SubTask;
 import model.Task;
@@ -7,7 +5,7 @@ import org.junit.jupiter.api.Test;
 import service.Manager;
 import service.TaskManager;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class InMemoryHistoryManagerTest {
 
