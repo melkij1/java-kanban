@@ -173,7 +173,7 @@ class InMemoryTaskManagerTest {
 
 
     @Test
-    public  void updateEpicEquals(){
+    public  void updateEpicEquals() {
         TaskManager taskManager = new Manager().getTaskManager();
         Epic epic = new Epic("Epic1", "Description1");
         taskManager.createEpic(epic);
