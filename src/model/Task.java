@@ -29,7 +29,7 @@ public class Task {
         this.status = status;
     }
 
-    public void setId (int id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -49,7 +49,7 @@ public class Task {
         return status;
     }
 
-    public void setStatus (TaskStatus status) {
+    public void setStatus(TaskStatus status) {
         this.status = status;
     }
 
