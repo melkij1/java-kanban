@@ -1,14 +1,14 @@
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import service.Manager;
+import service.Managers;
 import service.TaskManager;
 
 
-class ManagerTest {
+class ManagersTest {
 
     @Test
     public void taskManagerClassAlwaysReturnsInitializedManager() {
-        TaskManager taskManager = new Manager().getTaskManager();
+        TaskManager taskManager = new Managers().getTaskManager();
         Assertions.assertNotNull(taskManager);
     }
 }

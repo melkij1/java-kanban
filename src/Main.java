@@ -2,12 +2,12 @@ import enums.TaskStatus;
 import model.Epic;
 import model.SubTask;
 import model.Task;
-import service.Manager;
+import service.Managers;
 import service.TaskManager;
 
 public class Main {
     public static void main(String[] args) {
-        TaskManager taskManager = new Manager().getTaskManager();
+        TaskManager taskManager = new Managers().getTaskManager();
 
         //создаем задачи
         Task task = new Task("Задача 1", "Описание задачи 1");
@@ -69,17 +69,6 @@ public class Main {
 
         //получение всех эпиков
         taskManager.getEpics();
-
-
-
-//        //удаление задачи по ид
-//        taskManager.deleteTaskById(task2.getId());
-//
-//        //удаление эпика по ид
-//        taskManager.deleteEpicById(epic2.getId());
-//
-//        //удаление подзадачи по ид
-//        taskManager.deleteSubTaskById(subTask2.getId());
 
         //удаление всех задач
         taskManager.removeAllTask();

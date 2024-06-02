@@ -2,7 +2,7 @@ import model.Epic;
 import model.SubTask;
 import model.Task;
 import org.junit.jupiter.api.Test;
-import service.Manager;
+import service.Managers;
 import service.TaskManager;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -11,7 +11,7 @@ class InMemoryHistoryManagerTest {
 
     @Test
     void addHistory() {
-        TaskManager taskManager = new Manager().getTaskManager();
+        TaskManager taskManager = new Managers().getTaskManager();
         Task task = new Task("Задача 1", "Описание задачи 1");
         Epic epic = new Epic("Эпик 1", "Описание эпика 1");
 
@@ -28,7 +28,7 @@ class InMemoryHistoryManagerTest {
 
     @Test
     void remove() {
-        TaskManager taskManager = new Manager().getTaskManager();
+        TaskManager taskManager = new Managers().getTaskManager();
         Task task = new Task("Задача 1", "Описание задачи 1");
         Epic epic = new Epic("Эпик 1", "Описание эпика 1");
 
@@ -51,7 +51,7 @@ class InMemoryHistoryManagerTest {
 
     @Test
     void getHistory() {
-        TaskManager taskManager = new Manager().getTaskManager();
+        TaskManager taskManager = new Managers().getTaskManager();
         Task task = new Task("Задача 1", "Описание задачи 1");
         Epic epic = new Epic("Эпик 1", "Описание эпика 1");
 
