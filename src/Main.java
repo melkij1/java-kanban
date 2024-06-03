@@ -2,12 +2,12 @@ import enums.TaskStatus;
 import model.Epic;
 import model.SubTask;
 import model.Task;
-import service.Manager;
+import service.Managers;
 import service.TaskManager;
 
 public class Main {
     public static void main(String[] args) {
-        TaskManager taskManager= new Manager().getTaskManager();
+        TaskManager taskManager = new Managers().getTaskManager();
 
         //создаем задачи
         Task task = new Task("Задача 1", "Описание задачи 1");
@@ -35,12 +35,17 @@ public class Main {
 
         //получение задачи по id
         taskManager.getTaskById(task.getId());
+        taskManager.getTaskById(task2.getId());
+        taskManager.getTaskById(task2.getId());
 
         //получение подзадачи по id
         taskManager.getSubTaskById(subTask.getId());
+        taskManager.getSubTaskById(subTask2.getId());
+        taskManager.getSubTaskById(subTask3.getId());
 
         //получение эпика по id
         taskManager.getEpicById(epic.getId());
+        taskManager.getEpicById(epic2.getId());
 
         //обновление задачи
         Task task3 = new Task(task.getId(), "Обновленная задачи 1", "Обновление описания задачи 1", TaskStatus.IN_PROGRESS);
@@ -65,17 +70,6 @@ public class Main {
         //получение всех эпиков
         taskManager.getEpics();
 
-
-
-        //удаление задачи по ид
-        taskManager.deleteTaskById(task2.getId());
-
-        //удаление эпика по ид
-        taskManager.deleteEpicById(epic2.getId());
-
-        //удаление подзадачи по ид
-        taskManager.deleteSubTaskById(subTask2.getId());
-
         //удаление всех задач
         taskManager.removeAllTask();
 
@@ -84,6 +78,9 @@ public class Main {
 
         //удаление всех подзадач
         taskManager.removeAllSubTask();
+
+        System.out.println("Проверка списков после удаления");
+        printAllTasks(taskManager);
     }
 
     private static void printAllTasks(TaskManager manager) {
