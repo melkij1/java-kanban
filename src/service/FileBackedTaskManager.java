@@ -14,22 +14,22 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class FileBackedTaskManager extends InMemoryTaskManager {
-    private final File FILE;
+    private final File files;
 
     private static final String FIRST_LINE_NAME = "id,type,name,status,description,epic_id";
 
     public FileBackedTaskManager(File file) {
-        this.FILE  = file;
+        this.files  = file;
     }
 
     //загрузка задач из файла при запуске приложения
     public static FileBackedTaskManager loadFromFile(File file) {
         FileBackedTaskManager manager = new FileBackedTaskManager(file);
-        try(BufferedReader reader = new BufferedReader(new FileReader(file, StandardCharsets.UTF_8)))  {
+        try (BufferedReader reader = new BufferedReader(new FileReader(file, StandardCharsets.UTF_8)))  {
             List<String> lines  = reader.lines().collect(Collectors.toList());
 //            System.out.println(lines);
             for (int i = 1; i < lines.size(); i++)  {
-                if(lines.get(i).isEmpty()){
+                if (lines.get(i).isEmpty()) {
                     break;
                 }
                 String[] line = lines.get(i).split(",");
@@ -68,12 +68,12 @@ public class FileBackedTaskManager extends InMemoryTaskManager {
 
 
     public void save(){
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(FILE, StandardCharsets.UTF_8)))  {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(files, StandardCharsets.UTF_8)))  {
             writer.write(FIRST_LINE_NAME);
             writer.newLine();
             addAllTasksToFile(writer);
             writer.newLine();
-        }catch (IOException e){
+        } catch (IOException e) {
             throw new ManagersSaveException();
         }
     }
