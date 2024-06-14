@@ -1,6 +1,7 @@
 package model;
 
 import enums.TaskStatus;
+import enums.TaskType;
 
 import java.util.Objects;
 
@@ -19,6 +20,11 @@ public class SubTask extends Task {
 
     public int getEpicId() {
         return epicId;
+    }
+
+    @Override
+    public TaskType getTaskType() {
+        return TaskType.SUBTASK;
     }
 
     @Override
