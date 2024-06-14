@@ -50,9 +50,9 @@ public class FileBackedTaskManager extends InMemoryTaskManager {
     //создание задачи из строки
     private static Task fromString(String[] line)  {
         int id = Integer.parseInt(line[0]);
-        TaskType type= TaskType.valueOf(line[1]);
+        TaskType type = TaskType.valueOf(line[1]);
         String name = line[2];
-        TaskStatus status= TaskStatus.valueOf(line[3]);
+        TaskStatus status = TaskStatus.valueOf(line[3]);
         String description = line[4];
         switch (type) {
             case TASK:
@@ -60,14 +60,14 @@ public class FileBackedTaskManager extends InMemoryTaskManager {
             case EPIC:
                 return new Epic(id,name,description,status);
             case SUBTASK:
-                int epicId= Integer.parseInt(line[5]);
+                int epicId = Integer.parseInt(line[5]);
                 return new SubTask(id,name,description,status, epicId);
         }
         return null;
     }
 
 
-    public void save(){
+    public void save() {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(files, StandardCharsets.UTF_8)))  {
             writer.write(FIRST_LINE_NAME);
             writer.newLine();
