@@ -38,7 +38,7 @@ public class InMemoryTaskManager implements TaskManager {
 
         List<Integer> tasksList = epics.get(epicId).getSubTasks();
 
-        if(!tasksList.contains(subTask.getId())){
+        if (!tasksList.contains(subTask.getId())) {
             tasksList.add(subTask.getId());
         }
 
