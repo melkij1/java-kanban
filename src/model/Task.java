@@ -1,6 +1,7 @@
 package model;
 
 import enums.TaskStatus;
+import enums.TaskType;
 
 import java.util.Objects;
 
@@ -51,6 +52,10 @@ public class Task {
 
     public void setStatus(TaskStatus status) {
         this.status = status;
+    }
+
+    public TaskType getTaskType() {
+        return TaskType.TASK;
     }
 
     @Override
