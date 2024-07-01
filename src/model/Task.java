@@ -16,7 +16,7 @@ public class Task {
     private LocalDateTime startTime;
     private long duration;
 
-    final static DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern(ServiceConstants.DATE_FORMAT);
+    static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern(ServiceConstants.DATE_FORMAT);
 
     public Task(String title, String description) {
         this.title = title;

@@ -20,7 +20,7 @@ public class InMemoryTaskManager implements TaskManager {
     private final Map<Integer, Epic> epics = new HashMap<>();
     private final HistoryManager inMemoryHistoryManager = Managers.getDefaultHistory();
 
-    final static Comparator<Task> COMPARATOR = Comparator.comparing(Task::getStartTime,
+    static final Comparator<Task> COMPARATOR = Comparator.comparing(Task::getStartTime,
             Comparator.nullsLast(Comparator.naturalOrder())).thenComparing(Task::getId);
 
     protected Set<Task> prioritizedTasks = new TreeSet<>(COMPARATOR);
@@ -33,7 +33,6 @@ public class InMemoryTaskManager implements TaskManager {
 
         tasks.put(task.getId(), task);
         prioritizedTasks.add(task);
-        System.out.println(prioritizedTasks);
     }
 
     //метод создание подзадачи
@@ -290,7 +289,7 @@ public class InMemoryTaskManager implements TaskManager {
         LocalDateTime epicStartTime = null;
         LocalDateTime epicEndTime = null;
         long epicDuration = 0L;
-        for(Integer subTaskId : subtasksList) {
+        for (Integer subTaskId : subtasksList) {
             SubTask subTask = subTasks.get(subTaskId);
             LocalDateTime subTaskStartTime = subTask.getStartTime();
             LocalDateTime subTaskEndTime = subTask.getEndTime();
@@ -320,15 +319,15 @@ public class InMemoryTaskManager implements TaskManager {
     }
 
     @Override
-    public void validate(Task task){
+    public void validate(Task task) {
         List<Task> prioritizedTasks = getPrioritizedTasks();
 
-        for(Task prioritizedTask : prioritizedTasks) {
+        for (Task prioritizedTask : prioritizedTasks) {
             if (prioritizedTask.getStartTime() == null || prioritizedTask.getEndTime() == null) {
                 return;
             }
 
-            if(Objects.equals(task.getId(), prioritizedTask.getId())) {
+            if (Objects.equals(task.getId(), prioritizedTask.getId())) {
                 continue;
             }
 

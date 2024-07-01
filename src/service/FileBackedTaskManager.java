@@ -21,7 +21,7 @@ public class FileBackedTaskManager extends InMemoryTaskManager {
 
     private static final String FIRST_LINE_NAME = "id,type,name,status,description,startTime,endTime,duration,epic_id";
 
-    final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern(ServiceConstants.DATE_FORMAT);
+    static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern(ServiceConstants.DATE_FORMAT);
 
     public FileBackedTaskManager(File file) {
         this.files  = file;

@@ -12,7 +12,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class InMemoryHistoryManagerTest {
 
-    final LocalDateTime DATE = LocalDateTime.of(2024,1,1,0,0);
+    static final LocalDateTime DATE = LocalDateTime.of(2024,1,1,0,0);
 
     @Test
     void addHistory() {
