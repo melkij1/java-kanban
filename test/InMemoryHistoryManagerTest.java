@@ -1,3 +1,4 @@
+import enums.TaskStatus;
 import model.Epic;
 import model.SubTask;
 import model.Task;
@@ -5,21 +6,24 @@ import org.junit.jupiter.api.Test;
 import service.Managers;
 import service.TaskManager;
 
+import java.time.LocalDateTime;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class InMemoryHistoryManagerTest {
 
+    final LocalDateTime DATE = LocalDateTime.of(2024,1,1,0,0);
+
     @Test
     void addHistory() {
         TaskManager taskManager = new Managers().getTaskManager();
-        Task task = new Task("Задача 1", "Описание задачи 1");
+        Task task = new Task("Задача 1", "Описание задачи 1", TaskStatus.NEW, DATE, 1000);
         Epic epic = new Epic("Эпик 1", "Описание эпика 1");
 
         taskManager.createTask(task);
         taskManager.createEpic(epic);
 
-        SubTask subTask = new SubTask("Подзадача 1", "Описание подзадачи 1", 1);
-
+        SubTask subTask = new SubTask("Подзадача 1", "Описание подзадачи 1", 1, DATE, 1000);
         taskManager.createSubTask(subTask);
         assertEquals(0, taskManager.getHistory().size(), "История пустая");
         taskManager.getTaskById(task.getId());
@@ -58,7 +62,7 @@ class InMemoryHistoryManagerTest {
         taskManager.createTask(task);
         taskManager.createEpic(epic);
 
-        SubTask subTask = new SubTask("Подзадача 1", "Описание подзадачи 1", 1);
+        SubTask subTask = new SubTask("Подзадача 1", "Описание подзадачи 1", 1, DATE, 1000);
 
         taskManager.createSubTask(subTask);
 

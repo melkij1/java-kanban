@@ -4,16 +4,18 @@ import model.Task;
 import service.Managers;
 import service.TaskManager;
 
+import java.time.LocalDateTime;
+
 
 public class Main {
     public static void main(String[] args) {
         TaskManager fileBackedManager = new Managers().getDefaultFiles();
 
-        Task task = new Task("Задача 1", "Описание задачи 1");
+        Task task = new Task("Задача 1", "Описание задачи 1", LocalDateTime.of(2024, 1,1,0,0), 1000);
         fileBackedManager.createTask(task);
         Epic epic = new Epic("Эпик 1", "Описание эпика 2");
         fileBackedManager.createEpic(epic);
-        SubTask subTask  = new SubTask("Подзадача  1",  "Описание подзадачи  3", 1);
+        SubTask subTask  = new SubTask("Подзадача  1",  "Описание подзадачи  3", 1, LocalDateTime.of(2024, 2,3,0,0), 1000);
         fileBackedManager.createSubTask(subTask);
 
         //получим файл по пути resources/java-kanban.csv вида
