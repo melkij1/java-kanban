@@ -11,6 +11,7 @@ import java.util.Objects;
 public class Epic extends Task {
     private List<Integer> subTasks = new ArrayList<Integer>();
     private LocalDateTime endTime;
+
     public Epic(String title, String description) {
         super(title, description);
     }
@@ -49,7 +50,7 @@ public class Epic extends Task {
 
     @Override
     public String getEndTimeString() {
-        if(endTime == null){
+        if (endTime == null) {
             return "null";
         }
         return getEndTime().format(DATE_FORMATTER);

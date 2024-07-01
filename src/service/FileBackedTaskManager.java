@@ -21,7 +21,7 @@ public class FileBackedTaskManager extends InMemoryTaskManager {
 
     private static final String FIRST_LINE_NAME = "id,type,name,status,description,startTime,endTime,duration,epic_id";
 
-    final static DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern(ServiceConstants.DATE_FORMAT);
+    final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern(ServiceConstants.DATE_FORMAT);
 
     public FileBackedTaskManager(File file) {
         this.files  = file;
@@ -125,7 +125,7 @@ public class FileBackedTaskManager extends InMemoryTaskManager {
 
     private String toString(Epic epic) {
         return epic.getId() + "," + epic.getTaskType() + "," + epic.getTitle() + "," + epic.getStatus() + "," + epic.getDescription() + ","
-                + epic.getStartTimeString() + "," + epic.getEndTimeString() + "," + epic.getDuration() ;
+                + epic.getStartTimeString() + "," + epic.getEndTimeString() + "," + epic.getDuration();
     }
 
     private String toString(SubTask subTask)  {

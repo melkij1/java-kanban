@@ -92,21 +92,21 @@ public class Task {
     }
 
     public LocalDateTime getEndTime()  {
-        if(startTime != null) {
+        if (startTime != null) {
           return startTime.plusMinutes(duration);
         }
         return null;
     }
 
     public String getStartTimeString() {
-        if(startTime != null) {
+        if (startTime != null) {
             return startTime.format(DATE_FORMATTER);
         }
         return null;
     }
 
     public String getEndTimeString() {
-        if(startTime != null) {
+        if (startTime != null) {
             return getEndTime().format(DATE_FORMATTER);
         }
         return null;
