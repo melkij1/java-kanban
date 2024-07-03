@@ -50,9 +50,6 @@ public interface TaskManager {
 
     List<Task> getHistory();
 
-    void setEpicDateTime(int epicId);
-
     List<Task> getPrioritizedTasks();
 
-    void validate(Task task);
 }

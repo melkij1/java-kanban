@@ -277,8 +277,8 @@ public class InMemoryTaskManager implements TaskManager {
         return inMemoryHistoryManager.getHistory();
     }
 
-    @Override
-    public void setEpicDateTime(int epicId) {
+
+    private void setEpicDateTime(int epicId) {
         List<Integer> subtasksList = epics.get(epicId).getSubTasks();
 
         if (subtasksList.isEmpty()) {
@@ -318,8 +318,8 @@ public class InMemoryTaskManager implements TaskManager {
         return new ArrayList<>(prioritizedTasks);
     }
 
-    @Override
-    public void validate(Task task) {
+
+    private void validate(Task task) {
         List<Task> prioritizedTasks = getPrioritizedTasks();
 
         for (Task prioritizedTask : prioritizedTasks) {
