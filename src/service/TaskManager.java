@@ -49,4 +49,7 @@ public interface TaskManager {
     void checkEpicStatus(int id);
 
     List<Task> getHistory();
+
+    List<Task> getPrioritizedTasks();
+
 }
