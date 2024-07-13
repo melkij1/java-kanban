@@ -127,7 +127,7 @@ public class Task {
 
     @Override
     public String toString() {
-        return "Задача{" +
+        return "{" +
                 "id=" + id +
                 ", название='" + title + '\'' +
                 ", описание='" + description + '\'' +
