@@ -17,10 +17,10 @@ public class Main {
         Task task2 = new Task("Задача 1", "Описание задачи 1", LocalDateTime.of(2025, 1,1,0,0), 1000);
         taskManager.createTask(task);
         taskManager.createTask(task2);
-//        Epic epic = new Epic("Эпик 1", "Описание эпика 2");
-//        taskManager.createEpic(epic);
-//        SubTask subTask  = new SubTask("Подзадача  1",  "Описание подзадачи  3", 1, LocalDateTime.of(2024, 2,3,0,0), 1000);
-//        taskManager.createSubTask(subTask);
+        Epic epic = new Epic("Эпик 1", "Описание эпика 2");
+        taskManager.createEpic(epic);
+        SubTask subTask  = new SubTask("Подзадача  1",  "Описание подзадачи  3", 2, LocalDateTime.of(2024, 2,3,0,0), 1000);
+        taskManager.createSubTask(subTask);
 
         HttpTaskServer httpTaskServer = new HttpTaskServer(taskManager);
 
