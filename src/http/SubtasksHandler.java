@@ -34,7 +34,7 @@ public class SubtasksHandler extends BaseHttpHandler {
         String path = exchange.getRequestURI().getPath();
         String method = exchange.getRequestMethod();
         System.out.println("Received request: " + method + " " + path);
-        System.out.println(gson.toJson(taskManager.getTasks()));
+
         if ("GET".equals(method) && "/subtasks".equals(path)) {
             handleGetSubtasks(exchange, taskManager);
         } else if ("GET".equals(method) && path.startsWith("/subtasks/")) {
@@ -121,6 +121,7 @@ public class SubtasksHandler extends BaseHttpHandler {
 
     private void handleDeleteSubtask(HttpExchange exchange, TaskManager taskManager) throws IOException {
         // Логика для обработки запроса на удаление подтзадачи по ID с использованием TaskManager
+        System.out.println("delete");
         String path = exchange.getRequestURI().getPath();
         String[] pathParts = path.split("/");
         if (pathParts.length != 3) {
@@ -131,9 +132,12 @@ public class SubtasksHandler extends BaseHttpHandler {
         try {
             int subTaskId = Integer.parseInt(pathParts[2]);
             SubTask subTask = taskManager.getSubTaskById(subTaskId);
+            System.out.println("Deleting subTask: " + subTaskId);
+            System.out.println("Deleting subTaskSS: " + subTask);
             if (subTask == null) {
                 sendNotFound(exchange);
             } else {
+                System.out.println("remove" + subTask.getId());
                 taskManager.deleteTaskById(subTask.getId());
                 sendText(exchange, "Подзадача c ID: " + subTask.getId() + " удалена");
             }

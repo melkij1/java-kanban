@@ -9,7 +9,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.Objects;
 
 public class Task {
-    private int id;
+    private Integer id;
     private String title;
     private String description;
     private TaskStatus status = TaskStatus.NEW;
@@ -21,6 +21,7 @@ public class Task {
     public Task(String title, String description) {
         this.title = title;
         this.description = description;
+        this.id = null;
     }
 
     public Task(String title, String description, LocalDateTime startTime, long duration) {
@@ -28,6 +29,7 @@ public class Task {
         this.description = description;
         this.startTime = startTime;
         this.duration = duration;
+        this.id = null;
     }
 
     public Task(String title, String description, TaskStatus status, LocalDateTime startTime, long duration) {
@@ -36,6 +38,7 @@ public class Task {
         this.status = status;
         this.startTime = startTime;
         this.duration = duration;
+        this.id = null;
     }
 
     public Task(int id, String title, String description, TaskStatus status, LocalDateTime startTime, long duration) {
@@ -47,11 +50,11 @@ public class Task {
         this.duration = duration;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 

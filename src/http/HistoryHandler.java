@@ -29,7 +29,6 @@ public class HistoryHandler extends BaseHttpHandler {
         String path = exchange.getRequestURI().getPath();
         String method = exchange.getRequestMethod();
         System.out.println("Received request: " + method + " " + path);
-        System.out.println(gson.toJson(taskManager.getTasks()));
         if ("GET".equals(method) && "/history".equals(path)) {
             handleGetHistory(exchange, taskManager);
         } else {

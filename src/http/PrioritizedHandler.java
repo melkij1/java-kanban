@@ -29,7 +29,6 @@ public class PrioritizedHandler extends BaseHttpHandler {
         String path = exchange.getRequestURI().getPath();
         String method = exchange.getRequestMethod();
         System.out.println("Received request: " + method + " " + path);
-        System.out.println(gson.toJson(taskManager.getTasks()));
         if ("GET".equals(method) && "/prioritized".equals(path)) {
             handleGetPrioritized(exchange, taskManager);
         } else {

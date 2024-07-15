@@ -12,7 +12,6 @@ public class FileBackedTaskManagerTest extends TaskManagerTest<FileBackedTaskMan
     @BeforeEach
     void setUp() {
         System.out.println("Запуск теста");
-        System.out.println(taskManager);
         file = new File("./resources/java-test.csv");
         super.taskManager = new FileBackedTaskManager(file);
         initTasks();

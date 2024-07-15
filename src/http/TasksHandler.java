@@ -33,7 +33,6 @@ public class TasksHandler extends BaseHttpHandler {
         String path = exchange.getRequestURI().getPath();
         String method = exchange.getRequestMethod();
         System.out.println("Received request: " + method + " " + path);
-        System.out.println(gson.toJson(taskManager.getTasks()));
         if ("GET".equals(method) && "/tasks".equals(path)) {
             handleGetTasks(exchange, taskManager);
         } else if ("GET".equals(method) && path.startsWith("/tasks/")) {
@@ -106,7 +105,6 @@ public class TasksHandler extends BaseHttpHandler {
         }
 
         Integer taskId = task.getId();
-        System.out.println(taskId);
         if (taskId != null) {
             System.out.println("Updating task: " + taskId);
             taskManager.updateTask(task);

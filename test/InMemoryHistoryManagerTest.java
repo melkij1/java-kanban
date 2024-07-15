@@ -13,6 +13,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class InMemoryHistoryManagerTest {
 
     static final LocalDateTime DATE = LocalDateTime.of(2024,1,1,0,0);
+    static final LocalDateTime SUB_DATE = LocalDateTime.of(2024,2,1,0,0);
 
     @Test
     void addHistory() {
@@ -23,7 +24,7 @@ class InMemoryHistoryManagerTest {
         taskManager.createTask(task);
         taskManager.createEpic(epic);
 
-        SubTask subTask = new SubTask("Подзадача 1", "Описание подзадачи 1", 1, DATE, 1000);
+        SubTask subTask = new SubTask("Подзадача 1", "Описание подзадачи 1", 1, SUB_DATE, 1000);
         taskManager.createSubTask(subTask);
         assertEquals(0, taskManager.getHistory().size(), "История пустая");
         taskManager.getTaskById(task.getId());

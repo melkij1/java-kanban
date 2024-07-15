@@ -36,14 +36,11 @@ public class EpicsHandler extends BaseHttpHandler {
         String path = exchange.getRequestURI().getPath();
         String method = exchange.getRequestMethod();
         System.out.println("Received request: " + method + " " + path);
-        System.out.println(gson.toJson(taskManager.getTasks()));
         if ("GET".equals(method) && "/epics".equals(path)) {
             handleGetEpics(exchange, taskManager);
         } else if ("GET".equals(method) && path.startsWith("/epics/") && !path.endsWith("/subtasks")) {
-            System.out.println("substasks 1");
             handleGetEpicById(exchange, taskManager);
         } else if ("GET".equals(method) && path.endsWith("/subtasks")) {
-            System.out.println("substasks");
             handleGetSubtaskByEpicId(exchange, taskManager);
         } else if ("POST".equals(method) && "/epics".equals(path)) {
             handlePostEpic(exchange, taskManager);
