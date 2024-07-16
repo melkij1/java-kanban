@@ -163,6 +163,6 @@ public abstract class TaskManagerTest<T extends TaskManager> {
             taskManager.createTask(task3);
         });
 
-        Assertions.assertEquals("Время выполнения задачи пересекается с уже существеющем временем. Выберите другую дату", exception.getMessage());
+        Assertions.assertEquals("Время выполнения задачи пересекается с уже существующим временем. Выберите другую дату", exception.getMessage());
     }
 }

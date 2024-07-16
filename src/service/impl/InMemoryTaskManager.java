@@ -13,6 +13,7 @@ import java.time.LocalDateTime;
 import java.util.*;
 
 public class InMemoryTaskManager implements TaskManager {
+    private static InMemoryTaskManager instance;
     private int idCounter = 0;
 
     private final Map<Integer, Task> tasks = new HashMap<>();
@@ -24,6 +25,18 @@ public class InMemoryTaskManager implements TaskManager {
             Comparator.nullsLast(Comparator.naturalOrder())).thenComparing(Task::getId);
 
     protected Set<Task> prioritizedTasks = new TreeSet<>(COMPARATOR);
+
+    public InMemoryTaskManager() {
+        // Приватный конструктор для предотвращения создания экземпляров
+    }
+
+    public static synchronized InMemoryTaskManager getInstance() {
+        if (instance == null) {
+            instance = new InMemoryTaskManager();
+        }
+        return instance;
+    }
+
 
     //метод создание задачи
     @Override
@@ -327,7 +340,8 @@ public class InMemoryTaskManager implements TaskManager {
                 return;
             }
 
-            if (Objects.equals(task.getId(), prioritizedTask.getId())) {
+            // Проверка на null перед сравнением ID
+            if (task.getId() != null && Objects.equals(task.getId(), prioritizedTask.getId())) {
                 continue;
             }
 
@@ -336,7 +350,7 @@ public class InMemoryTaskManager implements TaskManager {
                 continue;
             }
 
-            throw new TaskException("Время выполнения задачи пересекается с уже существеющем временем. Выберите другую дату");
+            throw new TaskException("Время выполнения задачи пересекается с уже существующим временем. Выберите другую дату");
         }
     }
 }

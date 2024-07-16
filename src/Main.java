@@ -1,22 +1,32 @@
+import http.HttpTaskServer;
 import model.Epic;
 import model.SubTask;
 import model.Task;
 import service.Managers;
 import service.TaskManager;
 
+import java.io.IOException;
 import java.time.LocalDateTime;
 
 
 public class Main {
-    public static void main(String[] args) {
-        TaskManager fileBackedManager = new Managers().getDefaultFiles();
+    public static void main(String[] args) throws IOException {
+        TaskManager taskManager = new Managers().getTaskManager();
 
         Task task = new Task("Задача 1", "Описание задачи 1", LocalDateTime.of(2024, 1,1,0,0), 1000);
-        fileBackedManager.createTask(task);
+        Task task2 = new Task("Задача 1", "Описание задачи 1", LocalDateTime.of(2025, 1,1,0,0), 1000);
+        taskManager.createTask(task);
+        taskManager.createTask(task2);
         Epic epic = new Epic("Эпик 1", "Описание эпика 2");
-        fileBackedManager.createEpic(epic);
-        SubTask subTask  = new SubTask("Подзадача  1",  "Описание подзадачи  3", 1, LocalDateTime.of(2024, 2,3,0,0), 1000);
-        fileBackedManager.createSubTask(subTask);
+        taskManager.createEpic(epic);
+        SubTask subTask  = new SubTask("Подзадача  1",  "Описание подзадачи  3", 2, LocalDateTime.of(2024, 2,3,0,0), 1000);
+        taskManager.createSubTask(subTask);
+
+        HttpTaskServer httpTaskServer = new HttpTaskServer(taskManager);
+
+
+        httpTaskServer.start();
+
 
         //получим файл по пути resources/java-kanban.csv вида
 //        id,type,name,status,description,epic_id
